@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Form</class>
+ <widget class="QWidget" name="Form">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>663</width>
+    <height>556</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout_5" stretch="0">
+   <item>
+    <widget class="QTabWidget" name="tabWidget">
+     <property name="currentIndex">
+      <number>0</number>
+     </property>
+     <widget class="QWidget" name="tab35">
+      <attribute name="title">
+       <string>3.5Mhz</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout_2" stretch="3,1">
+       <item>
+        <widget class="QGraphicsView" name="graphic35"/>
+       </item>
+       <item>
+        <widget class="QTableWidget" name="table35">
+         <property name="sortingEnabled">
+          <bool>true</bool>
+         </property>
+         <property name="columnCount">
+          <number>4</number>
+         </property>
+         <column>
+          <property name="text">
+           <string>Callsign</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>Frequency</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>WPM</string>
+          </property>
+         </column>
+         <column>
+          <property name="text">
+           <string>Time</string>
+          </property>
+         </column>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="tab7">
+      <attribute name="title">
+       <string>7Mhz</string>
+      </attribute>
+      <layout class="QVBoxLayout" name="verticalLayout" stretch="3,1">
+       <item>
+        <widget class="QGraphicsView" name="graphic7"/>
+       </item>
+       <item>
+        <widget class="QTableWidget" name="table7"/>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

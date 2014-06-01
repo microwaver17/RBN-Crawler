@@ -9,7 +9,13 @@ import datetime
 import pytz
 
 class RBNData():
-    monthword = {"Jan": 1, "Feb": 2, "Mar": 3, "Apr": 4, "May": 5, "Jun": 6, "Jul": 7, "Aug": 8, "Sep": 9, "Oct": 10, "Nov": 11, "dec": 12}
+    monthword = {'Jan': 1, 'Feb': 2, 'Mar': 3, 'Apr': 4, 'May': 5, 'Jun': 6,
+                 'Jul': 7, 'Aug': 8, 'Sep': 9, 'Oct': 10, 'Nov': 11, 'dec': 12}
+    bandrange = {'3.5': (135.7, 137.8), '1.9': (1810.0, 1912.5), '3.5': (3500.0, 3687.0), '3.8': (3702.0, 3805.0),
+                '7': (7000.0, 7200.0), '10': (10100.0, 10150.0), '14': (14000.0, 14350.0), '18': (18068.0, 18168.0),
+                '21': (21000.0, 21450.0), '24': (24890.0, 24990.0), '28': (28000.0, 29700.0), '50': (50000.0, 54000.0),
+                '144': (144000.0, 146000.0), '430': (430000.0, 440000.0), '1200': (1260000.0, 1300000.0),
+                '2400': (2400000.0, 2450000.0), '5600': (5650000.0, 5850000.0)}
     JST = pytz.timezone('Asia/Tokyo')
 
     def __init__(self, response):
@@ -23,11 +29,14 @@ class RBNData():
         hour = int(timetext[0:2])
         minute = int(timetext[2:4])
         year = datetime.date.today().year
+        utctime = datetime.datetime(year,month,day,hour,minute,tzinfo=pytz.UTC)
+        self.time = utctime.astimezone(RBNData.JST)
 
-        self.time = datetime.datetime(year,month,day,hour,minute,tzinfo=pytz.UTC)
-
-    def get_time(self):
-        return self.time.astimezone(RBNData.JST)
+        self.band = None
+        for key in RBNData.bandrange.keys():
+            ran = RBNData.bandrange[key]
+            if ran[0] <= self.frequency <= ran[1]:
+                self.band = key
 
     def __str__(self):
         strs = "Call:"+self.callsign+" Freq:"+str(self.frequency)+" WPM:"+str(self.wpm)+" Time:"+str(self.get_time())
@@ -49,10 +58,11 @@ def load_station_detail(callsign,latestid=0):
 
     latest_id = 0
     for sta in rbndata['s'].keys():
+        print('id='+sta)
         if int(sta) > latest_id:
             latest_id = int(sta)
 
-    return stations, latestid
+    return stations, latest_id
 
 def print_latest(callsign):
     retry = 0
