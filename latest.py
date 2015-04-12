@@ -1,7 +1,9 @@
 __author__ = 'yuya'
 
-import rbn
 from urllib.error import *
+import time
+
+import rbn
 
 class LatestRBN:
 
@@ -33,8 +35,10 @@ class LatestRBN:
                     else:
                         detail = rbn.load_station_detail(callsign, self.last_id_set[callsign])
                 except URLError:
-                    print('Retry...')
+                    print('Retry(%d)...' % i)
+                    time.sleep(1)
                     continue
+                break
 
             if detail is not None:
                 self.rbn_list.extend(detail[0])

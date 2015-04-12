@@ -16,7 +16,7 @@ refresh_thread = None
 def refresh():
     while True:
         latestRBN.reload()
-        main_window.set_latest_rbn(latestRBN)
+        main_window.set_latest_rbn(latestRBN.rbn_list)
         time.sleep(60)
 
 if __name__ == "__main__":
